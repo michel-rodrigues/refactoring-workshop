@@ -36,9 +36,8 @@ Requisitos:
 	- Adicionar 2 tipos de plano fidelidade:
 	
 		- Gold
-
-    			Descontos de 30% no total da fatura
-    			Consumo do frigobar é cortesia
+			Descontos de 30% no total da fatura
+			Consumo do frigobar é cortesia
 
 		- Platinum
 
