@@ -34,15 +34,14 @@ Existe uma tributação estadual que varia dada a localização do hotel, essa t
 Requisitos:
 
 	- Adicionar 2 tipos de plano fidelidade:
+	
+		- Gold
 
-        - Gold
+    			Descontos de 30% no total da fatura
+    			Consumo do frigobar é cortesia
 
-    		Descontos de 30% no total da fatura
-    		Consumo do frigobar é cortesia
+		- Platinum
 
-
-    	- Platinum
-
-    		Descontos de 45% no total da fatura
-    		Consumo do frigobar é cortesia
-    		Café da manhã é cortesia
+			Descontos de 45% no total da fatura
+			Consumo do frigobar é cortesia
+			Café da manhã é cortesia
