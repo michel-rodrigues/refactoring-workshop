@@ -1,0 +1,16 @@
+{
+    "standard": {
+        "price": 9000,
+        "hasHotTub": false
+    },
+    "deluxe": {
+        "price": 14000,
+        "hasHotTub": false,
+        "minibarFee": 7500
+    },
+    "presidential": {
+        "price": 17000,
+        "hasHotTub": true,
+        "minibarFee": 9500
+    }
+}
