@@ -5,10 +5,11 @@ test('calculate presidential invoice', () => {
     roomPrice: 34000,
     minibar: 0,
     breakfast: 0,
-    total: 23800,
+    total: 24276,
   }
   const invoice = calculateInvoice({
     nights: 2,
+    state: 'SP',
     roomName: 'presidential',
     isSubscriber: true,
     minibarConsumed: true,
@@ -22,10 +23,11 @@ test('calculate deluxe invoice', () => {
     roomPrice: 42000,
     minibar: 7500,
     breakfast: 2500,
-    total: 52000,
+    total: 53040,
   }
   const invoice = calculateInvoice({
     nights: 3,
+    state: 'SP',
     roomName: 'deluxe',
     isSubscriber: false,
     minibarConsumed: true,
@@ -39,10 +41,11 @@ test('calculate standard invoice', () => {
     roomPrice: 36000,
     minibar: 0,
     breakfast: 2500,
-    total: 38500,
+    total: 39655,
   }
   const invoice = calculateInvoice({
     nights: 4,
+    state: 'RJ',
     roomName: 'standard',
     isSubscriber: false,
     minibarConsumed: false,

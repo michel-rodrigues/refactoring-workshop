@@ -1,7 +1,7 @@
 const rooms = require('./rooms.json')
 
 
-function calculateInvoice({ nights, roomName, isSubscriber, minibarConsumed, breakfastAdded }) {
+function calculateInvoice({ nights, roomName, state, isSubscriber, minibarConsumed, breakfastAdded }) {
   const room = rooms[roomName]
 
   const roomPrice  = room.price * nights
@@ -17,6 +17,11 @@ function calculateInvoice({ nights, roomName, isSubscriber, minibarConsumed, bre
   var total = roomPrice + minibarFee + breakfastFee
   if (isSubscriber) {
     total = total - (total * 0.3)
+  }
+  if (state === 'SP') {
+    total = total + (total * 0.02)
+  } else {
+    total = total + (total * 0.03)
   }
 
   return {

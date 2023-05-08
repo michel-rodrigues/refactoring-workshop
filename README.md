@@ -1,83 +1,48 @@
-Rede de hotéis
+A rede de hotéis Fowler tem foco em clientes que viajam a trabalho no eixo Rio / São Paulo e possui diversos hotéis nesse estados. A empresa tem um programa de fidelidade que consiste em uma assinatura que garante benefícios, tais como descontos e serviços de cortesia. O plano de fidelidade tem sido um sucesso, por isso a empresa quer criar diferentes planos de assinatura para acessar novos perfis de clientes.
+
+O plano de assinatura atual consiste nos seguintes benefícios:
+
+	- Desconto de 30% no total da fatura
+	- Consumo do frigobar é cortesia
+
+Todos os hotéis possuem 3 tipos de acomodações:
+
+	- Standard
+		Valor: R$ 90,00
+		Não possui frigobar
+		Não possui hidromassagem
+
+	- Deluxe
+
+		Valor: R$ 140,00
+		Consumo do frigobar: R$ 75,00
+		Não possui hidromassagem
+
+	- Presidential
+
+		valor: R$ 170,00
+		Consumo do frigobar: R$ 95,00
+		Possui hidromassagem
+
+Existe uma tributação estadual que varia dada a localização do hotel, essa tributação é repassada para o cliente na forma de uma taxa percentual sobre o valor total da fatura:
+
+	SP - 0,2%
+
+	RJ - 0,3%
 
 
-	Plano de fidelidade
+Requisitos:
 
-		Desconto de 30% no total da fatura
+	- Adicionar 2 tipos de plano fidelidade:
 
-		Consumo do frigobar é cortesia
+        - Gold
 
-
-	Reserva de quartos
-
-		Tipos de quartos
-
-			standard
-
-				valor: R$ 90,00
-				hidromassagem: false
-				não possui frigobar
-
-			deluxe
-
-				valor: R$ 140,00
-				hidromassagem: false
-				consumo do frigobar: R$ 75,00
-
-			presidential
-
-				valor: R$ 170,00
-				hidromassagem: true
-				consumo do frigobar: R$ 95,00
+    		Descontos de 30% no total da fatura
+    		Consumo do frigobar é cortesia
 
 
-		Incluir café da manhã: R$ 25,00
+    	- Platinum
 
-
-	Reserva
-
-		noites: 2
-		quarto: presidential
-		plano fidelidade: true
-		usou frigobar
-
-		noites: 3
-		quarto: deluxe
-		plano fidelidade: false
-		usou frigobar
-		incluiu café da manhã
-
-		noites: 4
-		quarto: standard
-		plano fidelidade: false
-		não usou frigobar
-		incluiu café da manhã
-
-
-Feature
-
-	Calcular a conta
-
-
-
-Nova Feature
-
-	Adicionar tipos de plano fidelidade
-
-		Planos de fidelidade
-
-
-			Gold
-
-				Descontos de 30% no total da fatura
-
-				Consumo do frigobar é cortesia
-
-
-			Platinum
-
-				Descontos de 45% no total da fatura
-
-				Consumo do frigobar é cortesia
-
-				Café da manhã é cortesia
+    		Descontos de 45% no total da fatura
+    		Consumo do frigobar é cortesia
+    		Café da manhã é cortesia
