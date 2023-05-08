@@ -1,4 +1,4 @@
-A rede de hotéis Fowler tem foco em clientes que viajam a trabalho no eixo Rio / São Paulo e possui diversos hotéis nesse estados. A empresa tem um programa de fidelidade que consiste em uma assinatura que garante benefícios, tais como descontos e serviços de cortesia. O plano de fidelidade tem sido um sucesso, por isso a empresa quer criar diferentes planos de assinatura para acessar novos perfis de clientes.
+A rede de hotéis Fowler tem foco em clientes que viajam a trabalho no eixo Rio / São Paulo e possui alguns hotéis nessas cidades. A empresa tem um programa de fidelidade que consiste em uma assinatura que garante benefícios, tais como descontos e serviços de cortesia. O plano de fidelidade tem sido um sucesso, por isso a empresa quer criar diferentes planos de assinatura para acessar novos perfis de clientes.
 
 O plano de assinatura atual consiste nos seguintes benefícios:
 
@@ -20,7 +20,7 @@ Todos os hotéis possuem 3 tipos de acomodações:
 
 	- Presidential
 
-		valor: R$ 170,00
+		Valor: R$ 170,00
 		Consumo do frigobar: R$ 95,00
 		Possui hidromassagem
 
