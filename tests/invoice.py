@@ -1,5 +1,7 @@
 import pytest
 from app.hotel import calculate_invoice
+from app.rooms import PresidentialRoom, StandardRoom, DeluxeRoom
+from app.subscriber import GoldSubscriber, NonSubscriber, PlatinumSubscriber
 
 
 def test_calculate_presidential_invoice():
@@ -12,8 +14,8 @@ def test_calculate_presidential_invoice():
     invoice = calculate_invoice(
         nights=2,
         state='SP',
-        room_name='presidential',
-        is_subscriber=True,
+        room=PresidentialRoom(),
+        subscriber=GoldSubscriber(),
         minibar_consumed=True,
         breakfast_added=False
     )
@@ -30,8 +32,8 @@ def test_calculate_deluxe_invoice():
     invoice = calculate_invoice(
         nights=3,
         state='SP',
-        room_name='deluxe',
-        is_subscriber=False,
+        room=DeluxeRoom(),
+        subscriber=NonSubscriber(),
         minibar_consumed=True,
         breakfast_added=True
     )
@@ -48,8 +50,26 @@ def test_calculate_standard_invoice():
     invoice = calculate_invoice(
         nights=4,
         state='RJ',
-        room_name='standard',
-        is_subscriber=False,
+        room=StandardRoom(),
+        subscriber=NonSubscriber(),
+        minibar_consumed=False,
+        breakfast_added=True
+    )
+    assert invoice == expected_invoice
+
+
+def test_calculate_platinum_invoice():
+    expected_invoice = {
+        'roomPrice': 51000,
+        'minibar': 0,
+        'breakfast': 0,
+        'total': 28891.5,
+    }
+    invoice = calculate_invoice(
+        nights=3,
+        state='RJ',
+        room=PresidentialRoom(),
+        subscriber=PlatinumSubscriber(),
         minibar_consumed=False,
         breakfast_added=True
     )

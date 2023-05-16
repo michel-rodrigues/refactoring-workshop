@@ -1,25 +1,24 @@
-from app.rooms import ROOMS
+from app.rooms import Room
+from app.subscriber import Subscriber
+
+STATES_TAX = {"SP": 0.02, "RJ": 0.03}
 
 
-def calculate_invoice(nights, room_name, state, is_subscriber, minibar_consumed, breakfast_added):
-    room = ROOMS[room_name]
+def calculate_invoice(
+        nights: int,
+        room: Room,
+        state: str,
+        subscriber: Subscriber,
+        minibar_consumed: bool,
+        breakfast_added: bool
+):
 
-    room_price = room['price'] * nights
+    # Pensamos que ainda podemos refatorar a parte das taxas para controlar as responsabilidades do metodo
+    room_price = room.calculate_room_price(nights)
+    minibar_fee = room.minibarFee if minibar_consumed and not subscriber.minibarCourtesy else 0
+    breakfast_fee = subscriber.breakfastTax if breakfast_added else 0
 
-    minibar_fee = room['minibarFee'] if minibar_consumed and room.get('minibarFee') else 0
-    if is_subscriber:
-        minibar_fee = 0
-
-    breakfast_fee = 2500 if breakfast_added else 0
-
-    total = room_price + minibar_fee + breakfast_fee
-    if is_subscriber:
-        total -= total * 0.3
-
-    if state == 'SP':
-        total += total * 0.02
-    else:
-        total += total * 0.03
+    total = get_total(room_price, minibar_fee, breakfast_fee, state, subscriber)
 
     return {
         'roomPrice': room_price,
@@ -27,3 +26,17 @@ def calculate_invoice(nights, room_name, state, is_subscriber, minibar_consumed,
         'breakfast': breakfast_fee,
         'total': total
     }
+
+
+def get_total(room_price, minibar_fee, breakfast_fee, state, subscriber):
+    total = room_price + minibar_fee + breakfast_fee
+    total -= total * subscriber.totalDiscount
+
+    total_with_tax = get_state_tax(state, total)
+
+    return total_with_tax
+
+
+def get_state_tax(state: str, total: float) -> float:
+    total += total * STATES_TAX[state]
+    return total
