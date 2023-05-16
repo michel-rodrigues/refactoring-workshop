@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "refatoring-workshop"
+version = "0.1.0"
+description = ""
+authors = ["Thiago Lima <e10.thiago@gmail.com>"]
+readme = "README.md"
+packages = [{include = "refatoring_workshop"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytest = "^7.3.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
