@@ -28,9 +28,9 @@ O cliente pode solicitar adicionar o café da manhã nas diárias pelo custo fix
 
 Existe uma tributação estadual que varia dada a localização do hotel, essa tributação é repassada para o cliente na forma de uma taxa percentual sobre o valor total da fatura:
 
-	SP - 0,2%
+	SP - 2%
 
-	RJ - 0,3%
+	RJ - 3%
 
 
 Requisitos:
