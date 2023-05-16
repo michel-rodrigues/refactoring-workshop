@@ -46,27 +46,3 @@ Requisitos:
 			Descontos de 45% no total da fatura
 			Consumo do frigobar é cortesia
 			Café da manhã é cortesia
-
-
--------------------------------------------------------------------------------
-
-A rede de hotéis agora conta com serviço de Spa. Por enquanto, somente dois novos serviços podem ser utilizados pelos clientes:
-
-	Massagem: R$ 120,00
-	Sauna: R$ 30,00
-
-Requisitos:
-
-	Contabilizar os novos serviços do Spa no cálculo da fatura
-
--------------------------------------------------------------------------------
-
-A rede de hotéis decidiu expandir sua rede para outros estados fora do eixo Rio / São Paulo para explorar novos públicos e oferecer os mesmos serviços para os clietes atuais quando eles viajarem nas férias. A rede já possui hotéis na Bahia e em Pernambuco e tem planos de seguir expandindo. Esses estados tem valores diferentes de tributações:
-
-	BA - 0,1%
-
-	PE - 0,15%
-
-Requisitos:
-
-	Adicionar os novos tributos estaduais ao cálculo da fatura
