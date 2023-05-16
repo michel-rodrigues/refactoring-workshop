@@ -1,16 +1,16 @@
-{
+ROOMS = {
     "standard": {
         "price": 9000,
-        "hasHotTub": false
+        "hasHotTub": False
     },
     "deluxe": {
         "price": 14000,
-        "hasHotTub": false,
+        "hasHotTub": False,
         "minibarFee": 7500
     },
     "presidential": {
         "price": 17000,
-        "hasHotTub": true,
+        "hasHotTub": True,
         "minibarFee": 9500
     }
 }
