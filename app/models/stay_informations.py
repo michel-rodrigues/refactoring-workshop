@@ -12,13 +12,17 @@ class StayInformations:
     state: str
     minibarConsumed: bool
     breakfastAdded: bool
+    massageAdded: bool
+    saunaAdded: bool
 
     def calculate_total_amount(self):
         return (
-            self.calculate_room_price() +
-            self.calculate_minibar_fee() +
-            self.calculate_breakfast_fee()
-        ) * (1 - self.subscription.discount)
+                       self.calculate_room_price() +
+                       self.calculate_minibar_fee() +
+                       self.calculate_breakfast_fee() +
+                       self.calculate_massage_fee() +
+                       self.calculate_sauna_fee()
+               ) * (1 - self.subscription.discount)
 
     def calculate_room_price(self):
         return self.room.price * self.nights
@@ -28,3 +32,9 @@ class StayInformations:
 
     def calculate_breakfast_fee(self):
         return 2500 if self.breakfastAdded and not self.subscription.breakfastComplimentary else 0
+
+    def calculate_massage_fee(self):
+        return 12000 if self.massageAdded else 0
+
+    def calculate_sauna_fee(self):
+        return 3000 if self.saunaAdded else 0
