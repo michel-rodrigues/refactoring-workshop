@@ -46,3 +46,14 @@ Requisitos:
 			Descontos de 45% no total da fatura
 			Consumo do frigobar é cortesia
 			Café da manhã é cortesia
+
+-------------------------------------------------------------------------------
+
+A rede de hotéis agora conta com serviço de Spa. Por enquanto, somente dois novos serviços podem ser utilizados pelos clientes:
+
+    Massagem: R$ 120,00
+    Sauna: R$ 30,00
+
+Requisitos:
+
+    Contabilizar os novos serviços do Spa no cálculo da fatura
