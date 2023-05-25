@@ -1,5 +1,8 @@
 from app.hotel import calculateInvoice
+from app.models.stay_informations import StayInformations
+from app.models.subs import DEFAULT_SUB, DEFAULT_WITHOUT_SUB
 from app.rooms import PRESIDENTIAL_ROOM, DELUXE_ROOM, STANDARD_ROOM
+
 
 def test_calculate_presidential_invoice():
     expected_invoice = {
@@ -9,12 +12,14 @@ def test_calculate_presidential_invoice():
         'total': 24276,
     }
     invoice = calculateInvoice(
-        nights=2,
-        state='SP',
-        room=PRESIDENTIAL_ROOM,
-        isSubscriber=True,
-        minibarConsumed=True,
-        breakfastAdded=False,
+        StayInformations(
+            nights=2,
+            state='SP',
+            subscription=DEFAULT_SUB,
+            room=PRESIDENTIAL_ROOM,
+            minibarConsumed=True,
+            breakfastAdded=False,
+        )
     )
     assert invoice == expected_invoice
 
@@ -27,12 +32,14 @@ def test_calculate_deluxe_invoice():
         'total': 53040,
     }
     invoice = calculateInvoice(
-        nights=3,
-        state='SP',
-        room=DELUXE_ROOM,
-        isSubscriber=False,
-        minibarConsumed=True,
-        breakfastAdded=True,
+        StayInformations(
+            nights=3,
+            state='SP',
+            subscription=DEFAULT_WITHOUT_SUB,
+            room=DELUXE_ROOM,
+            minibarConsumed=True,
+            breakfastAdded=True,
+        )
     )
     assert invoice == expected_invoice
 
@@ -45,11 +52,13 @@ def test_calculate_standard_invoice():
         'total': 39655,
     }
     invoice = calculateInvoice(
-        nights=4,
-        state='RJ',
-        room=STANDARD_ROOM,
-        isSubscriber=False,
-        minibarConsumed=False,
-        breakfastAdded=True,
+        StayInformations(
+            nights=4,
+            state='RJ',
+            subscription=DEFAULT_WITHOUT_SUB,
+            room=STANDARD_ROOM,
+            minibarConsumed=False,
+            breakfastAdded=True,
+        )
     )
     assert invoice == expected_invoice
