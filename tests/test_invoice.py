@@ -1,6 +1,6 @@
 from app.hotel import calculateInvoice
 from app.models.stay_informations import StayInformations
-from app.models.subs import DEFAULT_SUB, DEFAULT_WITHOUT_SUB
+from app.models.subs import DEFAULT_SUB, FREE_SUB, PLATINUM_SUB
 from app.rooms import PRESIDENTIAL_ROOM, DELUXE_ROOM, STANDARD_ROOM
 
 
@@ -35,7 +35,7 @@ def test_calculate_deluxe_invoice():
         StayInformations(
             nights=3,
             state='SP',
-            subscription=DEFAULT_WITHOUT_SUB,
+            subscription=FREE_SUB,
             room=DELUXE_ROOM,
             minibarConsumed=True,
             breakfastAdded=True,
@@ -55,7 +55,27 @@ def test_calculate_standard_invoice():
         StayInformations(
             nights=4,
             state='RJ',
-            subscription=DEFAULT_WITHOUT_SUB,
+            subscription=FREE_SUB,
+            room=STANDARD_ROOM,
+            minibarConsumed=False,
+            breakfastAdded=True,
+        )
+    )
+    assert invoice == expected_invoice
+
+
+def test_calculate_standard_invoice_when_platinum_subscription():
+    expected_invoice = {
+        'roomPrice': 36000,
+        'minibar': 0,
+        'breakfast': 0,
+        'total': 20394,
+    }
+    invoice = calculateInvoice(
+        StayInformations(
+            nights=4,
+            state='RJ',
+            subscription=PLATINUM_SUB,
             room=STANDARD_ROOM,
             minibarConsumed=False,
             breakfastAdded=True,

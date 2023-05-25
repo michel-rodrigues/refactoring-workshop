@@ -27,4 +27,4 @@ class StayInformations:
         return self.room.minibarFee if self.minibarConsumed and not self.subscription.minibarComplimentary else 0
 
     def calculate_breakfast_fee(self):
-        return 2500 if self.breakfastAdded else 0
+        return 2500 if self.breakfastAdded and not self.subscription.breakfastComplimentary else 0
