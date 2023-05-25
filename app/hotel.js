@@ -1,35 +1,40 @@
 const rooms = require('./rooms.json')
+const subscriptions = require('./subscriptions.json')
+const taxes = require('./taxes.js')
 
-
-function calculateInvoice({ nights, roomName, state, isSubscriber, minibarConsumed, breakfastAdded }) {
+function calculateInvoice(bookingData) {
+  const { nights, roomName, state, subscriptionPlan, minibarConsumed, breakfastAdded } = bookingData
   const room = rooms[roomName]
+  const subscription = subscriptions[subscriptionPlan]
 
-  const roomPrice  = room.price * nights
-
-  var minibarFee = minibarConsumed && room.minibarFee ? room.minibarFee : 0
-  if (isSubscriber) {
-    minibarFee = 0
-  }
-
-  const breakfastFee = breakfastAdded ? 2500 : 0
-
-  // Calculate the total amount of the invoice
-  var total = roomPrice + minibarFee + breakfastFee
-  if (isSubscriber) {
-    total = total - (total * 0.3)
-  }
-  if (state === 'SP') {
-    total = total + (total * 0.02)
-  } else {
-    total = total + (total * 0.03)
-  }
+  var total = getRoomPrice(bookingData) + getMinibarFee(bookingData) + getBreakfastFee(subscription.isBreakfastFree, breakfastAdded)
+  total = total * (1 - subscription.discount)
+  total = total * (1 + taxes[state])
 
   return {
-    roomPrice: roomPrice,
-    minibar: minibarFee,
-    breakfast: breakfastFee,
+    roomPrice: getRoomPrice(bookingData),
+    minibar: getMinibarFee(room.minibarFee, minibarConsumed, subscription.isMinibarFree),
+    breakfast: getBreakfastFee(subscription.isBreakfastFree, breakfastAdded),
     total: total,
   }
 }
 
-module.exports = calculateInvoice
+const getRoomPrice = ({ roomName, nights }) => {
+  return rooms[roomName].price * nights
+}
+
+const getBreakfastFee = (isBreakfastFree, breakfastAdded) => {
+  if (breakfastAdded && !isBreakfastFree) {
+    return 2500
+  }
+  return 0
+}
+
+const getMinibarFee = ({ roomName, minibarConsumed, subcriptionPlan}) => {
+  if (minibarConsumed && rooms[roomName].minibarFee && !subscriptions[subcriptionPlan].isMinibarFree) {
+    return rooms[roomName].minibarFee
+  }
+  return 0
+}
+
+module.exports = { calculateInvoice, getMinibarFee }

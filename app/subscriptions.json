@@ -1,0 +1,17 @@
+{
+    "gold": {
+        "discount": 0.3,
+        "isMinibarFree": true,
+        "isBreakfastFree": false
+    },
+    "platinum": {
+        "discount": 0.45,
+        "isMinibarFree": true,
+        "isBreakfastFree": true
+    },
+    "default": {
+        "discount": 0,
+        "isMinibarFree": false,
+        "isBreakfastFree": false
+    }
+}
