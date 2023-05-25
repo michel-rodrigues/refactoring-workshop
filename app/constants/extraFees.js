@@ -1,0 +1,1 @@
+module.exports = { SP: 0.02, default: 0.03 }

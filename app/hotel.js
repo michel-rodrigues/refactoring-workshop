@@ -1,10 +1,11 @@
+const extraFees = require('./constants/extraFees')
 const rooms = require('./rooms.json')
 
 
 function calculateInvoice({ nights, roomName, state, isSubscriber, minibarConsumed, breakfastAdded }) {
   const room = rooms[roomName]
 
-  const roomPrice  = room.price * nights
+  const roomPrice = room.price * nights
 
   var minibarFee = minibarConsumed && room.minibarFee ? room.minibarFee : 0
   if (isSubscriber) {
@@ -18,11 +19,10 @@ function calculateInvoice({ nights, roomName, state, isSubscriber, minibarConsum
   if (isSubscriber) {
     total = total - (total * 0.3)
   }
-  if (state === 'SP') {
-    total = total + (total * 0.02)
-  } else {
-    total = total + (total * 0.03)
-  }
+
+  const fees = extraFees[state.toUpperCase()] || extraFees.default
+
+  total = total + (total * fees)
 
   return {
     roomPrice: roomPrice,
