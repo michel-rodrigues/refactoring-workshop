@@ -1,6 +1,6 @@
 from app.hotel import calculateInvoice
 from app.models.stay_informations import StayInformations
-from app.models.subs import DEFAULT_SUB, FREE_SUB, PLATINUM_SUB
+from app.models.subs import GOLD_SUB, FREE_SUB, PLATINUM_SUB
 from app.rooms import PRESIDENTIAL_ROOM, DELUXE_ROOM, STANDARD_ROOM
 
 
@@ -15,7 +15,7 @@ def test_calculate_presidential_invoice():
         StayInformations(
             nights=2,
             state='SP',
-            subscription=DEFAULT_SUB,
+            subscription=GOLD_SUB,
             room=PRESIDENTIAL_ROOM,
             minibarConsumed=True,
             breakfastAdded=False,

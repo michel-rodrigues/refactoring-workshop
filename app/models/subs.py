@@ -9,5 +9,5 @@ class Subscription:
 
 
 PLATINUM_SUB = Subscription(discount=0.45, minibarComplimentary=True, breakfastComplimentary=True)
-DEFAULT_SUB = Subscription(discount=0.3, minibarComplimentary=True, breakfastComplimentary=False)
+GOLD_SUB = Subscription(discount=0.3, minibarComplimentary=True, breakfastComplimentary=False)
 FREE_SUB = Subscription(discount=0, minibarComplimentary=False, breakfastComplimentary=False)
