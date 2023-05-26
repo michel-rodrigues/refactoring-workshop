@@ -1,4 +1,6 @@
 import pytest
+
+from app.Invoice import Invoice
 from app.hotel import calculate_invoice
 from app.rooms import PresidentialRoom, StandardRoom, DeluxeRoom
 from app.subscriber import GoldSubscriber, NonSubscriber, PlatinumSubscriber
@@ -11,14 +13,13 @@ def test_calculate_presidential_invoice():
         'breakfast': 0,
         'total': 24276,
     }
-    invoice = calculate_invoice(
+    new_invoice = Invoice(
         nights=2,
-        state='SP',
         room=PresidentialRoom(),
         subscriber=GoldSubscriber(),
-        minibar_consumed=True,
-        breakfast_added=False
-    )
+        services={'minibar': False, 'breakfast': False})
+    invoice = calculate_invoice(new_invoice, state='SP')
+
     assert invoice == expected_invoice
 
 
@@ -29,14 +30,13 @@ def test_calculate_deluxe_invoice():
         'breakfast': 2500,
         'total': 53040,
     }
-    invoice = calculate_invoice(
-        nights=3,
-        state='SP',
-        room=DeluxeRoom(),
-        subscriber=NonSubscriber(),
-        minibar_consumed=True,
-        breakfast_added=True
-    )
+
+    new_invoice = Invoice(nights=3, room=DeluxeRoom(), subscriber=NonSubscriber(), services={
+        'minibar': True,
+        'breakfast': True
+    })
+
+    invoice = calculate_invoice(new_invoice, state='SP')
     assert invoice == expected_invoice
 
 
@@ -47,14 +47,13 @@ def test_calculate_standard_invoice():
         'breakfast': 2500,
         'total': 39655,
     }
-    invoice = calculate_invoice(
-        nights=4,
-        state='RJ',
-        room=StandardRoom(),
-        subscriber=NonSubscriber(),
-        minibar_consumed=False,
-        breakfast_added=True
-    )
+
+    new_invoice = Invoice(nights=4, room=StandardRoom(), subscriber=NonSubscriber(), services={
+        'minibar': False,
+        'breakfast': True
+    })
+
+    invoice = calculate_invoice(new_invoice, state='RJ')
     assert invoice == expected_invoice
 
 
@@ -65,12 +64,14 @@ def test_calculate_platinum_invoice():
         'breakfast': 0,
         'total': 28891.5,
     }
+
+    new_invoice = Invoice(nights=3, room=PresidentialRoom(), subscriber=PlatinumSubscriber(), services={
+        'minibar': False,
+        'breakfast': False
+    })
+
     invoice = calculate_invoice(
-        nights=3,
+        new_invoice,
         state='RJ',
-        room=PresidentialRoom(),
-        subscriber=PlatinumSubscriber(),
-        minibar_consumed=False,
-        breakfast_added=True
     )
     assert invoice == expected_invoice

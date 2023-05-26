@@ -1,35 +1,46 @@
-from app.rooms import Room
-from app.subscriber import Subscriber
+from app.Invoice import Invoice
 
 STATES_TAX = {"SP": 0.02, "RJ": 0.03}
 
 
-def calculate_invoice(
-        nights: int,
-        room: Room,
-        state: str,
-        subscriber: Subscriber,
-        minibar_consumed: bool,
-        breakfast_added: bool
-):
-
-    # Pensamos que ainda podemos refatorar a parte das taxas para controlar as responsabilidades do metodo
-    room_price = room.calculate_room_price(nights)
-    minibar_fee = room.minibarFee if minibar_consumed and not subscriber.minibarCourtesy else 0
-    breakfast_fee = subscriber.breakfastTax if breakfast_added else 0
-
-    total = get_total(room_price, minibar_fee, breakfast_fee, state, subscriber)
-
-    return {
-        'roomPrice': room_price,
-        'minibar': minibar_fee,
-        'breakfast': breakfast_fee,
-        'total': total
-    }
+def calculate_minibar(invoice: Invoice):
+    return invoice.room.minibarFee if invoice.services["minibar"] and not invoice.subscriber.minibarCourtesy else 0
 
 
-def get_total(room_price, minibar_fee, breakfast_fee, state, subscriber):
-    total = room_price + minibar_fee + breakfast_fee
+def calculate_breakfast(invoice: Invoice):
+    return invoice.subscriber.breakfastTax if invoice.services['breakfast'] else 0
+
+
+def calculate_sauna(invoice: Invoice):
+    return 3000 if invoice.services['sauna'] else 0
+
+
+def calculate_massage(invoice: Invoice):
+    return 7500 if invoice.services['massage'] else 0
+
+
+SERVICES = {
+    "minibar": calculate_minibar,
+    "breakfast": calculate_breakfast,
+    "sauna": calculate_sauna,
+    "massage": calculate_massage
+}
+
+
+def calculate_invoice(invoice: Invoice, state: str) -> dict:
+    room_price = {"roomPrice": invoice.room.calculate_room_price(invoice.nights)}
+    services = {service_name: SERVICES[service_name](invoice) for (service_name, service_status) in
+                invoice.services.items()}
+
+    total = {"total": get_total(room_price, services, state, invoice.subscriber)}
+
+    return room_price | services | total
+
+
+def get_total(room_price, services, state, subscriber):
+    total = room_price["roomPrice"]
+    total_services = sum(services.values())
+    total = total + total_services
     total -= total * subscriber.totalDiscount
 
     total_with_tax = get_state_tax(state, total)
