@@ -143,3 +143,44 @@ def test_calculate_standard_invoice_when_platinum_subscription():
         )
     )
     assert invoice == expected_invoice
+
+
+def test_calculate_standard_invoice_when_platinum_subscription_and_state_BA():
+    expected_invoice = {
+        'roomPrice': 36000,
+        'minibar': 0,
+        'breakfast': 0,
+        'total': 19998,
+    }
+    invoice = calculateInvoice(
+        StayInformations(
+            nights=4,
+            state='BA',
+            subscription=PLATINUM_SUB,
+            room=STANDARD_ROOM,
+            services=[BREAKFAST],
+            minibarConsumed=False,
+        )
+    )
+    assert invoice == expected_invoice
+
+
+def test_calculate_standard_invoice_when_platinum_subscription_and_state_PE():
+    expected_invoice = {
+        'roomPrice': 36000,
+        'minibar': 0,
+        'breakfast': 0,
+        'total': 20097,
+    }
+    invoice = calculateInvoice(
+        StayInformations(
+            nights=4,
+            state='PE',
+            subscription=PLATINUM_SUB,
+            room=STANDARD_ROOM,
+            services=[BREAKFAST],
+            minibarConsumed=False,
+        )
+    )
+    assert invoice == expected_invoice
+

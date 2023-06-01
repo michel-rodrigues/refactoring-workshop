@@ -10,7 +10,13 @@ def calculateInvoice(stay_information: StayInformations):
     }
 
 
+state_fee_mapper = {
+    'SP': 0.02,
+    'RJ': 0.03,
+    'BA': 0.01,
+    'PE': 0.015,
+}
+
+
 def apply_taxation(amount, state):
-    if state == 'SP':
-        return amount + amount * 0.02
-    return amount + amount * 0.03
+    return amount + amount * state_fee_mapper[state]

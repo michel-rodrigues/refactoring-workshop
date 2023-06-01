@@ -32,4 +32,3 @@ class StayInformations:
 
     def additional_services_fee(self):
         return {service.name: service.get_fee(self.subscription) for service in self.services}
-
