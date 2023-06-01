@@ -3,10 +3,10 @@ const plans = require('./constants/plans')
 const rooms = require('./rooms.json')
 
 
-function calculateInvoice({ nights, roomName, state, isSubscriber, minibarConsumed, breakfastAdded }) {
+function calculateInvoice({ nights, roomName, state, plan, minibarConsumed, breakfastAdded }) {
 
   const room = rooms[roomName]
-  const plan = isSubscriber ? plans.gold : plans.free
+  plan = plan || plans.free
 
   return {
     roomPrice: calculateRoomPrice({ nights, room }),
