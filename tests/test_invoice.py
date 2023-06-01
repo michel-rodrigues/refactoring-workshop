@@ -3,7 +3,50 @@ from app.models.stay_informations import StayInformations
 from app.models.subs import GOLD_SUB, FREE_SUB, PLATINUM_SUB
 from app.rooms import PRESIDENTIAL_ROOM, DELUXE_ROOM, STANDARD_ROOM
 
-## 25/05/2023 > falta add teste de massagem e massagem + sauna
+
+def test_calculate_presidential_invoice_with_massagem_and_sauna():
+    expected_invoice = {
+        'roomPrice': 34000,
+        'minibar': 0,
+        'breakfast': 0,
+        'total': 34986,
+    }
+    invoice = calculateInvoice(
+        StayInformations(
+            nights=2,
+            state='SP',
+            subscription=GOLD_SUB,
+            room=PRESIDENTIAL_ROOM,
+            minibarConsumed=True,
+            breakfastAdded=False,
+            massageAdded=True,
+            saunaAdded=True,
+        )
+    )
+    assert invoice == expected_invoice
+
+
+def test_calculate_presidential_invoice_with_massagem():
+    expected_invoice = {
+        'roomPrice': 34000,
+        'minibar': 0,
+        'breakfast': 0,
+        'total': 32844,
+    }
+    invoice = calculateInvoice(
+        StayInformations(
+            nights=2,
+            state='SP',
+            subscription=GOLD_SUB,
+            room=PRESIDENTIAL_ROOM,
+            minibarConsumed=True,
+            breakfastAdded=False,
+            massageAdded=True,
+            saunaAdded=False,
+        )
+    )
+    assert invoice == expected_invoice
+
 
 def test_calculate_presidential_invoice_with_sauna():
     expected_invoice = {
@@ -25,6 +68,7 @@ def test_calculate_presidential_invoice_with_sauna():
         )
     )
     assert invoice == expected_invoice
+
 
 def test_calculate_presidential_invoice():
     expected_invoice = {
