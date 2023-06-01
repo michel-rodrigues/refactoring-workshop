@@ -3,22 +3,22 @@ const plans = require('./constants/plans')
 const rooms = require('./rooms.json')
 
 
-function calculateInvoice({ nights, roomName, state, plan, minibarConsumed, breakfastAdded }) {
+function calculateInvoice({ nights, roomName, state, plan, services }) {
 
   const room = rooms[roomName]
   plan = plan || plans.free
 
   return {
     roomPrice: calculateRoomPrice({ nights, room }),
-    minibar: calculateMinibarFee({ room, minibarConsumed }, plan),
-    breakfast: calculateBreakfastFee({ breakfastAdded }, plan),
-    total: calculateTotal({ nights, minibarConsumed, breakfastAdded, room }, plan, state),
+    minibar: calculateMinibarFee({ room, minibarConsumed: services.minibarConsumed }, plan),
+    breakfast: calculateBreakfastFee({ breakfastAdded: services.breakfastAdded }, plan),
+    total: calculateTotal({ nights, services, room }, plan, state),
   }
 }
 
-function calculateFees({ minibarConsumed, breakfastAdded, room }, plan) {
+function calculateFees({ services, room }, plan) {
 
-  return calculateBreakfastFee({ breakfastAdded }, plan) + calculateMinibarFee({ room, minibarConsumed }, plan)
+  return calculateBreakfastFee({ breakfastAdded: services.breakfastAdded }, plan) + calculateMinibarFee({ room, minibarConsumed: services.minibarConsumed }, plan)
 }
 
 function calculateMinibarFee({ room, minibarConsumed }, plan) {
@@ -40,8 +40,8 @@ function calculateBreakfastFee({ breakfastAdded }, plan) {
   return breakfastPrice
 }
 
-function calculateTotal({ minibarConsumed, breakfastAdded, room, nights }, plan, state) {
-  let total = calculateRoomPrice({ room, nights }) + calculateFees({ minibarConsumed, breakfastAdded, room }, plan)
+function calculateTotal({ services, room, nights }, plan, state) {
+  let total = calculateRoomPrice({ room, nights }) + calculateFees({ services, room }, plan)
 
 
   total = total - (total * plan.totalDiscount)

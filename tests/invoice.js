@@ -13,8 +13,10 @@ test('calculate presidential invoice for plan gold in SP', () => {
     state: 'SP',
     roomName: 'presidential',
     plan: plans.gold,
-    minibarConsumed: true,
-    breakfastAdded: false,
+    services: {
+      minibarConsumed: true,
+      breakfastAdded: false
+    }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
