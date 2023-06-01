@@ -14,20 +14,26 @@ class StayInformations:
     breakfastAdded: bool
     massageAdded: bool
     saunaAdded: bool
-    services: list = []
+    # services: list = []
 
     def calculate_total_amount(self):
         total_amount = (
                        self.calculate_room_price() +
-                       self.calculate_minibar_fee() +
-                       self.calculate_breakfast_fee() +
-                       self.calculate_massage_fee() +
-                       self.calculate_sauna_fee()
+                       self.calculate_services_fee()
                ) * (1 - self.subscription.discount)
         return round(total_amount)
 
     def calculate_room_price(self):
         return self.room.price * self.nights
+
+    def calculate_services_fee(self):
+        return (
+            self.calculate_minibar_fee() +
+            self.calculate_breakfast_fee() +
+            self.calculate_massage_fee() +
+            self.calculate_sauna_fee()
+        )
+        # return sum([service.price for service in self.services])
 
     def calculate_minibar_fee(self):
         return self.room.minibarFee if self.minibarConsumed and not self.subscription.minibarComplimentary else 0
