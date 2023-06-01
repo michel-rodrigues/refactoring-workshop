@@ -6,7 +6,7 @@ const rooms = require('./rooms.json')
 function calculateInvoice({ nights, roomName, state, isSubscriber, minibarConsumed, breakfastAdded }) {
 
   const room = rooms[roomName]
-  const plan = isSubscriber ? plans.standard : plans.free
+  const plan = isSubscriber ? plans.gold : plans.free
 
   return {
     roomPrice: calculateRoomPrice({ nights, room }),
