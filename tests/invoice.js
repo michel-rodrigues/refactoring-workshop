@@ -33,8 +33,10 @@ test('calculate deluxe invoice for plan free in SP', () => {
     state: 'SP',
     roomName: 'deluxe',
     plan: plans.free,
-    minibarConsumed: true,
-    breakfastAdded: true,
+    services: {
+      minibarConsumed: true,
+      breakfastAdded: true
+    }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
@@ -51,8 +53,10 @@ test('calculate standard invoice for plan free in RJ', () => {
     state: 'RJ',
     roomName: 'standard',
     plan: plans.free,
-    minibarConsumed: false,
-    breakfastAdded: true,
+    services: {
+      minibarConsumed: false,
+      breakfastAdded: true
+    }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
@@ -69,8 +73,10 @@ test('calculate standard invoice for plan platinum in RJ', () => {
     state: 'RJ',
     roomName: 'standard',
     plan: plans.platinum,
-    minibarConsumed: false,
-    breakfastAdded: false,
+    services: {
+      minibarConsumed: false,
+      breakfastAdded: false
+    }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
@@ -88,8 +94,10 @@ test('calculate standard invoice for plan platinum in SP', () => {
     state: 'SP',
     roomName: 'standard',
     plan: plans.platinum,
-    minibarConsumed: false,
-    breakfastAdded: false,
+    services: {
+      minibarConsumed: false,
+      breakfastAdded: false
+    }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
@@ -107,8 +115,10 @@ test('calculate deluxe invoice for plan platinum in SP', () => {
     state: 'SP',
     roomName: 'deluxe',
     plan: plans.platinum,
-    minibarConsumed: false,
-    breakfastAdded: false,
+    services: {
+      minibarConsumed: false,
+      breakfastAdded: false
+    }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
@@ -125,8 +135,10 @@ test('calculate deluxe invoice for plan platinum in RJ', () => {
     state: 'RJ',
     roomName: 'deluxe',
     plan: plans.platinum,
-    minibarConsumed: false,
-    breakfastAdded: false,
+    services: {
+      minibarConsumed: false,
+      breakfastAdded: false
+    }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
@@ -144,8 +156,10 @@ test('calculate presidential invoice for plan platinum in RJ', () => {
     state: 'RJ',
     roomName: 'presidential',
     plan: plans.platinum,
-    minibarConsumed: false,
-    breakfastAdded: false,
+    services: {
+      minibarConsumed: false,
+      breakfastAdded: false
+    }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
@@ -162,8 +176,10 @@ test('calculate presidential invoice for plan platinum in SP', () => {
     state: 'SP',
     roomName: 'presidential',
     plan: plans.platinum,
-    minibarConsumed: false,
-    breakfastAdded: false,
+    services: {
+      minibarConsumed: false,
+      breakfastAdded: false
+    }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
