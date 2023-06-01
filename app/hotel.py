@@ -5,7 +5,7 @@ def calculateInvoice(stay_information: StayInformations):
     return {
         'roomPrice': stay_information.calculate_room_price(),
         'minibar': stay_information.calculate_minibar_fee(),
-        'breakfast': stay_information.calculate_breakfast_fee(),
+        **stay_information.additional_services_fee(),
         'total': apply_taxation(stay_information.calculate_total_amount(), stay_information.state),
     }
 
