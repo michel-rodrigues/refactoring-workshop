@@ -1,6 +1,7 @@
 const calculateInvoice = require('../app/hotel');
+const plans = require('../app/constants/plans')
 
-test('calculate presidential invoice', () => {
+test('calculate presidential invoice for plan gold', () => {
   expectedInvoice = {
     roomPrice: 34000,
     minibar: 0,
@@ -11,14 +12,14 @@ test('calculate presidential invoice', () => {
     nights: 2,
     state: 'SP',
     roomName: 'presidential',
-    isSubscriber: true,
+    plan: plans.gold,
     minibarConsumed: true,
     breakfastAdded: false,
   })
   expect(invoice).toEqual(expectedInvoice)
 });
 
-test('calculate deluxe invoice', () => {
+test('calculate deluxe invoice for plan free', () => {
   expectedInvoice = {
     roomPrice: 42000,
     minibar: 7500,
@@ -29,14 +30,14 @@ test('calculate deluxe invoice', () => {
     nights: 3,
     state: 'SP',
     roomName: 'deluxe',
-    isSubscriber: false,
+    plan: plans.free,
     minibarConsumed: true,
     breakfastAdded: true,
   })
   expect(invoice).toEqual(expectedInvoice)
 });
 
-test('calculate standard invoice', () => {
+test('calculate standard invoice for plan free', () => {
   expectedInvoice = {
     roomPrice: 36000,
     minibar: 0,
@@ -47,7 +48,7 @@ test('calculate standard invoice', () => {
     nights: 4,
     state: 'RJ',
     roomName: 'standard',
-    isSubscriber: false,
+    plan: plans.free,
     minibarConsumed: false,
     breakfastAdded: true,
   })
