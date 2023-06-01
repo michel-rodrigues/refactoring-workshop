@@ -1,5 +1,6 @@
 const extraFees = require('./constants/extraFees')
 const plans = require('./constants/plans')
+const servicesFees = require('./constants/servicesFees')
 const rooms = require('./rooms.json')
 
 
@@ -18,7 +19,18 @@ function calculateInvoice({ nights, roomName, state, plan, services }) {
 
 function calculateFees({ services, room }, plan) {
 
-  return calculateBreakfastFee({ breakfastAdded: services.breakfastAdded }, plan) + calculateMinibarFee({ room, minibarConsumed: services.minibarConsumed }, plan)
+  return calculateBreakfastFee({ breakfastAdded: services.breakfastAdded }, plan) +
+    calculateMinibarFee({ room, minibarConsumed: services.minibarConsumed }, plan) +
+    calculateSaunaFee(services.saunaAdded) +
+    calculateMassageFee(services.massageAdded)
+}
+
+function calculateSaunaFee(saunaAdded) {
+  return saunaAdded ? servicesFees.sauna.total : 0
+}
+
+function calculateMassageFee(massageAdded) {
+  return massageAdded ? servicesFees.massage.total : 0
 }
 
 function calculateMinibarFee({ room, minibarConsumed }, plan) {
@@ -41,9 +53,11 @@ function calculateBreakfastFee({ breakfastAdded }, plan) {
 }
 
 function calculateTotal({ services, room, nights }, plan, state) {
+
   let total = calculateRoomPrice({ room, nights }) + calculateFees({ services, room }, plan)
 
 
+  console.log(total)
   total = total - (total * plan.totalDiscount)
 
 

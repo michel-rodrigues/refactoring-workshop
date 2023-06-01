@@ -15,7 +15,9 @@ test('calculate presidential invoice for plan gold in SP', () => {
     plan: plans.gold,
     services: {
       minibarConsumed: true,
-      breakfastAdded: false
+      breakfastAdded: false,
+      massageAdded : false,
+      saunaAdded: false
     }
   })
   expect(invoice).toEqual(expectedInvoice)
@@ -35,7 +37,9 @@ test('calculate deluxe invoice for plan free in SP', () => {
     plan: plans.free,
     services: {
       minibarConsumed: true,
-      breakfastAdded: true
+      breakfastAdded: true,
+      massageAdded : false,
+      saunaAdded: false
     }
   })
   expect(invoice).toEqual(expectedInvoice)
@@ -55,7 +59,9 @@ test('calculate standard invoice for plan free in RJ', () => {
     plan: plans.free,
     services: {
       minibarConsumed: false,
-      breakfastAdded: true
+      breakfastAdded: true,
+      massageAdded : false,
+      saunaAdded: false
     }
   })
   expect(invoice).toEqual(expectedInvoice)
@@ -75,7 +81,9 @@ test('calculate standard invoice for plan platinum in RJ', () => {
     plan: plans.platinum,
     services: {
       minibarConsumed: false,
-      breakfastAdded: false
+      breakfastAdded: false,
+      massageAdded : false,
+      saunaAdded: false
     }
   })
   expect(invoice).toEqual(expectedInvoice)
@@ -96,7 +104,9 @@ test('calculate standard invoice for plan platinum in SP', () => {
     plan: plans.platinum,
     services: {
       minibarConsumed: false,
-      breakfastAdded: false
+      breakfastAdded: false,
+      massageAdded : false,
+      saunaAdded: false
     }
   })
   expect(invoice).toEqual(expectedInvoice)
@@ -117,7 +127,9 @@ test('calculate deluxe invoice for plan platinum in SP', () => {
     plan: plans.platinum,
     services: {
       minibarConsumed: false,
-      breakfastAdded: false
+      breakfastAdded: false,
+      massageAdded : false,
+      saunaAdded: false
     }
   })
   expect(invoice).toEqual(expectedInvoice)
@@ -137,7 +149,9 @@ test('calculate deluxe invoice for plan platinum in RJ', () => {
     plan: plans.platinum,
     services: {
       minibarConsumed: false,
-      breakfastAdded: false
+      breakfastAdded: false,
+      massageAdded : false,
+      saunaAdded: false
     }
   })
   expect(invoice).toEqual(expectedInvoice)
@@ -158,7 +172,9 @@ test('calculate presidential invoice for plan platinum in RJ', () => {
     plan: plans.platinum,
     services: {
       minibarConsumed: false,
-      breakfastAdded: false
+      breakfastAdded: false,
+      massageAdded : false,
+      saunaAdded: false
     }
   })
   expect(invoice).toEqual(expectedInvoice)
@@ -178,10 +194,54 @@ test('calculate presidential invoice for plan platinum in SP', () => {
     plan: plans.platinum,
     services: {
       minibarConsumed: false,
-      breakfastAdded: false
+      breakfastAdded: false,
+      massageAdded : false,
+      saunaAdded: false
     }
   })
   expect(invoice).toEqual(expectedInvoice)
 });
 
+test('calculate presidential invoice for plan platinum in SP including massage ', () => {
+  expectedInvoice = {
+    roomPrice: 68000,
+    minibar: 0,
+    breakfast: 0,
+    total: 44880,
+  }
+  const invoice = calculateInvoice({
+    nights: 4,
+    state: 'SP',
+    roomName: 'presidential',
+    plan: plans.platinum,
+    services: {
+      minibarConsumed: false,
+      breakfastAdded: false,
+      massageAdded : true,
+      saunaAdded: false
+    }
+  })
+  expect(invoice).toEqual(expectedInvoice)
+});
 
+test('calculate presidential invoice for plan platinum in SP including massage and sauna ', () => {
+  expectedInvoice = {
+    roomPrice: 68000,
+    minibar: 0,
+    breakfast: 0,
+    total: 46563,
+  }
+  const invoice = calculateInvoice({
+    nights: 4,
+    state: 'SP',
+    roomName: 'presidential',
+    plan: plans.platinum,
+    services: {
+      minibarConsumed: false,
+      breakfastAdded: false,
+      massageAdded : true,
+      saunaAdded: true
+    }
+  })
+  expect(invoice).toEqual(expectedInvoice)
+});
